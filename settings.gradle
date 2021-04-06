@@ -1,0 +1,3 @@
+include ':BallReflectBarView'
+include ':app'
+rootProject.name = "LinkedBallReflectBarView"
