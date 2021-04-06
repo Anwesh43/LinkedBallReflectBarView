@@ -203,4 +203,12 @@ class BallReflectBarView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity : Activity) : BallReflectBarView {
+            val view : BallReflectBarView = BallReflectBarView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
