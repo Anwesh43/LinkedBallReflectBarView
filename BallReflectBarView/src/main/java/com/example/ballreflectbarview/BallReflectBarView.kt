@@ -180,4 +180,27 @@ class BallReflectBarView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BallReflectBarView) {
+
+        private var animator : Animator = Animator(view)
+        private var brb : BallReflectBar = BallReflectBar(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            brb.draw(canvas, paint)
+            animator.animate {
+                brb.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            brb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
