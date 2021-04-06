@@ -21,8 +21,8 @@ val colors : Array<Int> = arrayOf(
 val backColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 20
 val ballRFactor : Float = 9.9f
-val squareFactor : Float = 3.9f
-val parts : Int = 4
+val squareFactor : Float = 1.1f
+val parts : Int = 3
 val scGap : Float = 0.02f / parts
 
 
@@ -36,14 +36,17 @@ fun Canvas.drawBallReflectBar(scale : Float, w : Float, h : Float, paint : Paint
     val sf1 : Float = scale.divideScale(0, parts)
     val sf2 : Float = scale.divideScale(1, parts)
     val sf3 : Float = scale.divideScale(2, parts)
+    val size : Float = Math.min(w, h) / squareFactor
+    val sff2 : Float = sf2.sinify()
     save()
     translate(w / 2, h / 2)
     drawCircle(
         -w / 2 + r + (w - 2 * r) * sf2,
-        -h / 2 + r + (h - 2 * r) * sf2.sinify(),
+        -h / 2 + r + (h - 2 * r - size) * sff2,
         r * (sf1 - sf3),
         paint
     )
+    drawRect(RectF(-size / 2, h / 2 -size * sff2, size / 2, h / 2), paint)
     restore()
 }
 
